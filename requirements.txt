@@ -1,0 +1,6 @@
+python-dotenv
+wyze-sdk
+opencv-python
+pillow
+numpy
+requests
