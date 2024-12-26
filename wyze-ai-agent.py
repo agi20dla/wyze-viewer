@@ -139,7 +139,7 @@ class WyzeAIAgent:
     def run(self,
             event_types: Optional[List[EventAlarmType]] = None,
             ai_event_filters: Optional[List[AiEventType]] = None,
-            check_interval: int = 10):
+            check_interval: int = 30):
         """Start the AI agent's monitoring process."""
 
         print("Starting Wyze AI Agent...")
@@ -188,7 +188,7 @@ if __name__ == "__main__":
         agent.run(
             event_types=[EventAlarmType.MOTION],
             ai_event_filters=[AiEventType.PERSON, AiEventType.PACKAGE],
-            check_interval=15
+            check_interval=int(os.getenv('CHECK_INTERVAL_SECS', '30'))
         )
 
     except Exception as e:
