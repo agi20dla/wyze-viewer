@@ -233,7 +233,6 @@ class WyzeCameras:
 
             events = self.client.events.list(
                 device_ids=device_macs,
-                event_values=event_types,
                 begin=begin,
                 end=end,
                 limit=limit,
@@ -353,7 +352,7 @@ if __name__ == "__main__":
 
         wyze_cams.monitor_events(
             callback=handle_event,
-            event_types=[EventAlarmType.MOTION, EventAlarmType.FACE, EventAlarmType.SMOKE, EventAlarmType.SOUND],
+            event_types=[EventAlarmType.MOTION, EventAlarmType.FACE, EventAlarmType.TRIGGERED, EventAlarmType.SMOKE, EventAlarmType.SOUND,],
             ai_event_filters=[AiEventType.PERSON, AiEventType.PACKAGE, AiEventType.PET, AiEventType.VEHICLE],
             check_interval=15
         )

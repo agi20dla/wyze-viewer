@@ -116,6 +116,7 @@ class WyzeAIAgent:
             self.ai_rules[ai_type] = []
         self.ai_rules[ai_type].append(action)
 
+
     def handle_event(self, event_data: dict) -> None:
         """Handle incoming events and execute appropriate actions."""
         event: Event = event_data['event']
@@ -135,6 +136,7 @@ class WyzeAIAgent:
             if detection in self.ai_rules:
                 for action in self.ai_rules[detection]:
                     action.execute(event_data)
+
 
     def run(self,
             event_types: Optional[List[EventAlarmType]] = None,
@@ -178,6 +180,7 @@ if __name__ == "__main__":
             SecurityAction()
         )
 
+
         # Get list of cameras before starting
         cameras = agent.cameras.get_cameras()
         print(f"\nMonitoring {len(cameras)} cameras:")
@@ -186,8 +189,8 @@ if __name__ == "__main__":
 
         # Start monitoring
         agent.run(
-            event_types=[EventAlarmType.MOTION],
-            ai_event_filters=[AiEventType.PERSON, AiEventType.PACKAGE],
+            event_types=[EventAlarmType.MOTION, EventAlarmType.FACE, EventAlarmType.TRIGGERED, EventAlarmType.SMOKE, EventAlarmType.SOUND,],
+            ai_event_filters=[AiEventType.PERSON, AiEventType.PACKAGE, AiEventType.PET, AiEventType.VEHICLE],
             check_interval=int(os.getenv('CHECK_INTERVAL_SECS', '30'))
         )
 
